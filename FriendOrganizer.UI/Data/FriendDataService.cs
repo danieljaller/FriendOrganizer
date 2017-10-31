@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using FriendOrganizer.DataAccess;
 using FriendOrganizer.Model;
 
@@ -7,11 +11,18 @@ namespace FriendOrganizer.UI.Data
 {
     class FriendDataService : IFriendDataService
     {
-        public IEnumerable<Friend> GetAllFriends()
+        private readonly Func<FriendOrganizerDbContext> _contextCreator;
+
+        public FriendDataService(Func<FriendOrganizerDbContext> contextCreator)
         {
-            using (var context = new FriendOrganizerDbContext())
+            _contextCreator = contextCreator;
+        }
+
+        public async Task<List<Friend>> GetAllFriendsAsync()
+        {
+            using (var context = _contextCreator())
             {
-                return context.Friends.AsNoTracking().ToList();
+                return await context.Friends.AsNoTracking().ToListAsync();
             }
         }
     }
