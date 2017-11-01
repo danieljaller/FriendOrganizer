@@ -31,9 +31,15 @@ namespace FriendOrganizer.UI.ViewModel
             return true;
         }
 
-        private void OnSaveExecute()
+        private async void OnSaveExecute()
         {
-            throw new NotImplementedException();
+            await _dataService.SaveAsync(Friend);
+
+            _eventAggregator.GetEvent<AfterFriendSavedEvent>().Publish(new AfterFriendSavedEventArgs()
+            {
+                Id = Friend.Id,
+                DisplayMember = $"{Friend.FirstName} {Friend.LastName}"
+            });
         }
 
         private async void OnOpenFriendDetailsView(int friendId)
