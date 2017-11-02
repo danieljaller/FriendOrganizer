@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
-using FriendOrganizer.Model;
 using FriendOrganizer.UI.Data;
 using FriendOrganizer.UI.Event;
+using FriendOrganizer.UI.Wrapper;
 using Prism.Commands;
 using Prism.Events;
 
@@ -16,6 +12,7 @@ namespace FriendOrganizer.UI.ViewModel
     {
         private readonly IFriendDataService _dataService;
         private readonly IEventAggregator _eventAggregator;
+        private FriendWrapper _friend;
 
         public FriendDetailsViewModel(IFriendDataService dataService, IEventAggregator eventAggregator)
         {
@@ -26,6 +23,26 @@ namespace FriendOrganizer.UI.ViewModel
             SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
         }
 
+        public async Task LoadAsync(int friendId)
+        {
+            var friend = await _dataService.GetByIdAsync(friendId);
+
+            Friend = new FriendWrapper(friend);
+        }
+
+
+        public FriendWrapper Friend
+        {
+            get { return _friend; }
+            private set
+            {
+                _friend = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand SaveCommand { get; }
+
         private bool OnSaveCanExecute()
         {
             return true;
@@ -33,7 +50,7 @@ namespace FriendOrganizer.UI.ViewModel
 
         private async void OnSaveExecute()
         {
-            await _dataService.SaveAsync(Friend);
+            await _dataService.SaveAsync(Friend.Model);
 
             _eventAggregator.GetEvent<AfterFriendSavedEvent>().Publish(new AfterFriendSavedEventArgs()
             {
@@ -46,24 +63,5 @@ namespace FriendOrganizer.UI.ViewModel
         {
             await LoadAsync(friendId);
         }
-
-        public async Task LoadAsync(int friendId)
-        {
-            Friend = await _dataService.GetByIdAsync(friendId);
-        }
-
-        private Friend _friend;
-
-        public Friend Friend
-        {
-            get { return _friend; }
-            private set
-            {
-                _friend = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ICommand SaveCommand { get;}
     }
 }
