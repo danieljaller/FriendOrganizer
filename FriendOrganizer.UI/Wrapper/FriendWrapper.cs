@@ -3,27 +3,25 @@ using FriendOrganizer.Model;
 
 namespace FriendOrganizer.UI.Wrapper
 {
-    public class FriendWrapper : NotifyDataErrorInfoBase
+    public class FriendWrapper : ModelWrapper<Friend>
     {
-        public Friend Model { get; }
-
-        public FriendWrapper(Friend model)
+        public FriendWrapper(Friend model) : base(model)
         {
-            Model = model;
         }
 
         public int Id { get { return Model.Id; } }
 
         public string FirstName
         {
-            get { return Model.FirstName; }
+            get { return GetValue<string>(); }
             set
             {
-                Model.FirstName = value;
-                OnPropertyChanged();
+                SetValue(value);
                 ValidateProperty(nameof(FirstName));
             }
         }
+
+
 
         private void ValidateProperty(string propertyName)
         {
@@ -40,22 +38,14 @@ namespace FriendOrganizer.UI.Wrapper
 
         public string LastName
         {
-            get { return Model.LastName; }
-            set
-            {
-                Model.LastName = value;
-                OnPropertyChanged();
-            }
+            get { return GetValue<string>(); }
+            set { SetValue(value); }
         }
 
         public string Email
         {
-            get { return Model.Email; }
-            set
-            {
-                Model.Email = value;
-                OnPropertyChanged();
-            }
+            get { return GetValue<string>(); }
+            set{ SetValue(value); }
         }
     }
 }
