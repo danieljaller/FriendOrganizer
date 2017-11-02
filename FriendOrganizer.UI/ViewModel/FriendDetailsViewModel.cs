@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using FriendOrganizer.UI.Data;
+using FriendOrganizer.UI.Data.Repositories;
 using FriendOrganizer.UI.Event;
 using FriendOrganizer.UI.Wrapper;
 using Prism.Commands;
@@ -10,11 +11,11 @@ namespace FriendOrganizer.UI.ViewModel
 {
     public class FriendDetailsViewModel : ViewModelBase, IFriendDetailsViewModel
     {
-        private readonly IFriendDataService _dataService;
+        private readonly IFriendRepository _dataService;
         private readonly IEventAggregator _eventAggregator;
         private FriendWrapper _friend;
 
-        public FriendDetailsViewModel(IFriendDataService dataService, IEventAggregator eventAggregator)
+        public FriendDetailsViewModel(IFriendRepository dataService, IEventAggregator eventAggregator)
         {
             _dataService = dataService;
             _eventAggregator = eventAggregator;
@@ -60,7 +61,7 @@ namespace FriendOrganizer.UI.ViewModel
 
         private async void OnSaveExecute()
         {
-            await _dataService.SaveAsync(Friend.Model);
+            await _dataService.SaveAsync();
 
             _eventAggregator.GetEvent<AfterFriendSavedEvent>().Publish(new AfterFriendSavedEventArgs()
             {

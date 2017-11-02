@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FriendOrganizer.Model;
 using FriendOrganizer.UI.Data;
+using FriendOrganizer.UI.Data.Lookups;
 using FriendOrganizer.UI.Event;
 using Prism.Events;
 
