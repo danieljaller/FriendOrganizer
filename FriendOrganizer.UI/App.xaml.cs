@@ -24,10 +24,5 @@ namespace FriendOrganizer.UI
             var mainWindow = container.Resolve<MainWindow>();
             mainWindow.Show();
         }
-
-        private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            
-        }
     }
 }
