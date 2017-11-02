@@ -27,7 +27,7 @@ namespace FriendOrganizer.UI.Wrapper
 
         private void ValidatePropertyInternal(string propertyName, object currentValue)
         {
-            ClearError(propertyName);
+            ClearErrors(propertyName);
 
             ValidateDataAnnotations(propertyName, currentValue);
 

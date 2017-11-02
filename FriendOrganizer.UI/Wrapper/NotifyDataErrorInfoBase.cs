@@ -19,6 +19,7 @@ namespace FriendOrganizer.UI.Wrapper
         protected virtual void OnErrorsChanged(string propertyName)
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+            base.OnPropertyChanged(nameof(HasErrors));
         }
 
         protected void AddError(string propertyName, string error)
@@ -33,10 +34,12 @@ namespace FriendOrganizer.UI.Wrapper
             }
         }
 
-        protected void ClearError(string propertyName)
+        protected void ClearErrors(string propertyName)
         {
             if (_errorsByPropertyName.ContainsKey(propertyName))
                 _errorsByPropertyName.Remove(propertyName);
+            
+            OnErrorsChanged(propertyName);
         }
 
         public bool HasErrors => _errorsByPropertyName.Any();
