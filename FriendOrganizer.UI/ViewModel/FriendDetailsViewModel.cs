@@ -19,7 +19,7 @@ namespace FriendOrganizer.UI.ViewModel
         {
             _dataService = dataService;
             _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<OpenFriendDetailsViewEvent>().Subscribe(OnOpenFriendDetailsView);
+            
 
             SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
         }
@@ -68,11 +68,6 @@ namespace FriendOrganizer.UI.ViewModel
                 Id = Friend.Id,
                 DisplayMember = $"{Friend.FirstName} {Friend.LastName}"
             });
-        }
-
-        private async void OnOpenFriendDetailsView(int friendId)
-        {
-            await LoadAsync(friendId);
         }
     }
 }
