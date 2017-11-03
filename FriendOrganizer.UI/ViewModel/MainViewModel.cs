@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Windows;
-using FriendOrganizer.Model;
-using FriendOrganizer.UI.Data;
 using FriendOrganizer.UI.Event;
+using FriendOrganizer.UI.View.Services;
 using Prism.Events;
 
 namespace FriendOrganizer.UI.ViewModel
@@ -12,13 +9,16 @@ namespace FriendOrganizer.UI.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private IEventAggregator _eventAggregator;
+        private readonly IMessageDialogService _messageDialogService;
         private Func<IFriendDetailsViewModel> _friendDetailsViewModelCreator;
         private IFriendDetailsViewModel _friendDetailsViewModel;
         public INavigationViewModel NavigationViewModel { get; }
 
-        public MainViewModel(INavigationViewModel navigationViewModel, Func<IFriendDetailsViewModel> friendDetailsViewModelCreator, IEventAggregator eventAggregator)
+        public MainViewModel(INavigationViewModel navigationViewModel, Func<IFriendDetailsViewModel> friendDetailsViewModelCreator, 
+            IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
         {
             _eventAggregator = eventAggregator;
+            _messageDialogService = messageDialogService;
             _friendDetailsViewModelCreator = friendDetailsViewModelCreator;
             _eventAggregator.GetEvent<OpenFriendDetailsViewEvent>().Subscribe(OnOpenFriendDetailsView);
             NavigationViewModel = navigationViewModel;
@@ -43,9 +43,9 @@ namespace FriendOrganizer.UI.ViewModel
         {
             if (FriendDetailsViewModel != null && FriendDetailsViewModel.HasChanges)
             {
-                var result = MessageBox.Show("You've made changes. Navigate away?", "Question", MessageBoxButton.OKCancel);
+                var result = _messageDialogService.ShowOkCancelDialog("You've made changes. Navigate away?", "Question");
 
-                if (result == MessageBoxResult.Cancel)
+                if (result == MessageDialogResult.Cancel)
                     return;
             }
             FriendDetailsViewModel = _friendDetailsViewModelCreator();
