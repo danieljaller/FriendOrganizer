@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FriendOrganizer.Model;
 
 namespace FriendOrganizer.UI.Data.Repositories
@@ -9,5 +8,6 @@ namespace FriendOrganizer.UI.Data.Repositories
         Task<Friend> GetByIdAsync(int friendId);
         Task SaveAsync();
         bool HasChanges();
+        void Add(Friend friend);
     }
 }
