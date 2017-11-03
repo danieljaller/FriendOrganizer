@@ -21,9 +21,9 @@ namespace FriendOrganizer.UI.ViewModel
             _friendRepository = friendRepository;
             _eventAggregator = eventAggregator;
 
-
             SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
         }
+
 
         public async Task LoadAsync(int friendId)
         {
@@ -59,11 +59,6 @@ namespace FriendOrganizer.UI.ViewModel
 
         public ICommand SaveCommand { get; }
 
-        private bool OnSaveCanExecute()
-        {
-            return Friend != null && !Friend.HasErrors && HasChanges;
-        }
-
         public bool HasChanges
         {
             get { return _hasChanges; }
@@ -78,6 +73,11 @@ namespace FriendOrganizer.UI.ViewModel
             }
         }
 
+        private bool OnSaveCanExecute()
+        {
+            return Friend != null && !Friend.HasErrors && HasChanges;
+        }
+
         private async void OnSaveExecute()
         {
             await _friendRepository.SaveAsync();
@@ -88,6 +88,5 @@ namespace FriendOrganizer.UI.ViewModel
                 DisplayMember = $"{Friend.FirstName} {Friend.LastName}"
             });
         }
-
     }
 }
