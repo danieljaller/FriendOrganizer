@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows;
 using FriendOrganizer.Model;
 using FriendOrganizer.UI.Data;
 using FriendOrganizer.UI.Event;
@@ -40,6 +41,13 @@ namespace FriendOrganizer.UI.ViewModel
 
         private async void OnOpenFriendDetailsView(int friendId)
         {
+            if (FriendDetailsViewModel != null && FriendDetailsViewModel.HasChanges)
+            {
+                var result = MessageBox.Show("You've made changes. Navigate away?", "Question", MessageBoxButton.OKCancel);
+
+                if (result == MessageBoxResult.Cancel)
+                    return;
+            }
             FriendDetailsViewModel = _friendDetailsViewModelCreator();
             await FriendDetailsViewModel.LoadAsync(friendId);
         }
