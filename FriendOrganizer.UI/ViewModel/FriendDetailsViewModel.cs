@@ -46,6 +46,9 @@ namespace FriendOrganizer.UI.ViewModel
             };
 
             ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+
+            if (Friend.Id == 0)
+                Friend.FirstName = "";
         }
 
         private Friend CreateNewFriend()
