@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         FontSize="20">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewModel:FriendDetailsViewModel}">
+        <DataTemplate DataType="{x:Type viewModel:FriendDetailViewModel}">
             <view:FriendDetailsView/>
         </DataTemplate>
     </Window.Resources>
@@ -33,6 +33,6 @@
                              DataContext="{Binding NavigationViewModel}"/>
         <ContentControl Grid.Row="1"
                         Grid.Column="1"
-                        Content="{Binding FriendDetailsViewModel}"/>
+                        Content="{Binding DetailViewModel}"/>
     </Grid>
 </Window>

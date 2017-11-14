@@ -15,7 +15,7 @@ using Prism.Events;
 
 namespace FriendOrganizer.UI.ViewModel
 {
-    public class FriendDetailsViewModel : ViewModelBase, IFriendDetailsViewModel
+    public class FriendDetailViewModel : ViewModelBase, IFriendDetailViewModel
     {
         private readonly IFriendRepository _friendRepository;
         private readonly IEventAggregator _eventAggregator;
@@ -25,7 +25,7 @@ namespace FriendOrganizer.UI.ViewModel
         private FriendPhoneNumberWrapper _selectedPhoneNumber;
         private bool _hasChanges;
 
-        public FriendDetailsViewModel(IFriendRepository friendRepository, IEventAggregator eventAggregator, IMessageDialogService messageDialogService,
+        public FriendDetailViewModel(IFriendRepository friendRepository, IEventAggregator eventAggregator, IMessageDialogService messageDialogService,
             IProgrammingLanguageLookupDataService programmingLanguageLookupDataService)
         {
             _friendRepository = friendRepository;

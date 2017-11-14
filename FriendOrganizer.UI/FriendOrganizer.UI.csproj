@@ -76,11 +76,12 @@
     <Compile Include="Data\Lookups\LookupDataService.cs" />
     <Compile Include="Event\AfterFriendDeletedEvent.cs" />
     <Compile Include="Event\AfterFriendSavedEvent.cs" />
-    <Compile Include="Event\OpenFriendDetailsViewEvent.cs" />
+    <Compile Include="Event\OpenDetailsViewEvent.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Startup\Bootstrapper.cs" />
-    <Compile Include="ViewModel\FriendDetailsViewModel.cs" />
-    <Compile Include="ViewModel\IFriendDetailsViewModel.cs" />
+    <Compile Include="ViewModel\FriendDetailViewModel.cs" />
+    <Compile Include="ViewModel\IDetailViewModel.cs" />
+    <Compile Include="ViewModel\IFriendDetailViewModel.cs" />
     <Compile Include="ViewModel\INavigationViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NavigationItemViewModel.cs" />
