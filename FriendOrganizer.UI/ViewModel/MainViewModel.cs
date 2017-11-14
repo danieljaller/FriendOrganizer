@@ -23,13 +23,13 @@ namespace FriendOrganizer.UI.ViewModel
             _messageDialogService = messageDialogService;
             _friendDetailsViewModelCreator = friendDetailsViewModelCreator;
             _eventAggregator.GetEvent<OpenDetailsViewEvent>().Subscribe(OnOpenDetailsView);
-            _eventAggregator.GetEvent<AfterFriendDeletedEvent>().Subscribe(AfterFriendDeleted);
+            _eventAggregator.GetEvent<AfterDetailDeletedEvent>().Subscribe(AfterDetailDeleted);
             NavigationViewModel = navigationViewModel;
 
             CreateNewFriendCommand = new DelegateCommand(OnCreateNewFriendExecute);
         }
 
-        private void AfterFriendDeleted(int friendId)
+        private void AfterDetailDeleted(AfterDetailDeletedEventArgs args)
         {
             DetailViewModel = null;
         }
