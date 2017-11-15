@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace FriendOrganizer.UI.View
 {
   /// <summary>
-  /// Interaction logic for MeetingDetailView.xaml
+  /// Interaction logic for FriendDetailView.xaml
   /// </summary>
-  public partial class MeetingDetailView : UserControl
+  public partial class FriendDetailView : UserControl
   {
-    public MeetingDetailView()
+    public FriendDetailView()
     {
       InitializeComponent();
     }

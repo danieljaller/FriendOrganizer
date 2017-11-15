@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{22CD9CD8-BEFE-422A-B943-FAD5D3D3C064}</ProjectGuid>
+    <ProjectGuid>{1DAEFF81-2922-48B2-87D3-B57DC26E67C9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FriendOrganizer.DataAccess</RootNamespace>
     <AssemblyName>FriendOrganizer.DataAccess</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -48,32 +48,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FriendOrganizerDbContext.cs" />
-    <Compile Include="Migrations\201710311450503_Initial.cs" />
-    <Compile Include="Migrations\201710311450503_Initial.Designer.cs">
-      <DependentUpon>201710311450503_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201701151817528_InitialDatabase.cs" />
+    <Compile Include="Migrations\201701151817528_InitialDatabase.Designer.cs">
+      <DependentUpon>201701151817528_InitialDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711031328362_AddedProgrammingLanguage.cs" />
-    <Compile Include="Migrations\201711031328362_AddedProgrammingLanguage.Designer.cs">
-      <DependentUpon>201711031328362_AddedProgrammingLanguage.cs</DependentUpon>
+    <Compile Include="Migrations\201704242047417_AddedProgrammingLanguage.cs" />
+    <Compile Include="Migrations\201704242047417_AddedProgrammingLanguage.Designer.cs">
+      <DependentUpon>201704242047417_AddedProgrammingLanguage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711031406589_AddedFriendPhoneNumbers.cs" />
-    <Compile Include="Migrations\201711031406589_AddedFriendPhoneNumbers.Designer.cs">
-      <DependentUpon>201711031406589_AddedFriendPhoneNumbers.cs</DependentUpon>
+    <Compile Include="Migrations\201705020736511_AddedFriendPhoneNumbers.cs" />
+    <Compile Include="Migrations\201705020736511_AddedFriendPhoneNumbers.Designer.cs">
+      <DependentUpon>201705020736511_AddedFriendPhoneNumbers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711151352576_AddedMeetings.cs" />
-    <Compile Include="Migrations\201711151352576_AddedMeetings.Designer.cs">
-      <DependentUpon>201711151352576_AddedMeetings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711151401180_AddedMeetingsAgain.cs" />
-    <Compile Include="Migrations\201711151401180_AddedMeetingsAgain.Designer.cs">
-      <DependentUpon>201711151401180_AddedMeetingsAgain.cs</DependentUpon>
+    <Compile Include="Migrations\201706081409450_AddedMeeting.cs" />
+    <Compile Include="Migrations\201706081409450_AddedMeeting.Designer.cs">
+      <DependentUpon>201706081409450_AddedMeeting.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FriendOrganizer.Model\FriendOrganizer.Model.csproj">
-      <Project>{45463aa3-5ca9-408d-801c-bdc75305be0e}</Project>
+      <Project>{3943529c-dd85-4ec1-908e-93409b052684}</Project>
       <Name>FriendOrganizer.Model</Name>
     </ProjectReference>
   </ItemGroup>
@@ -82,20 +78,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710311450503_Initial.resx">
-      <DependentUpon>201710311450503_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701151817528_InitialDatabase.resx">
+      <DependentUpon>201701151817528_InitialDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711031328362_AddedProgrammingLanguage.resx">
-      <DependentUpon>201711031328362_AddedProgrammingLanguage.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704242047417_AddedProgrammingLanguage.resx">
+      <DependentUpon>201704242047417_AddedProgrammingLanguage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711031406589_AddedFriendPhoneNumbers.resx">
-      <DependentUpon>201711031406589_AddedFriendPhoneNumbers.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705020736511_AddedFriendPhoneNumbers.resx">
+      <DependentUpon>201705020736511_AddedFriendPhoneNumbers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711151352576_AddedMeetings.resx">
-      <DependentUpon>201711151352576_AddedMeetings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711151401180_AddedMeetingsAgain.resx">
-      <DependentUpon>201711151401180_AddedMeetingsAgain.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706081409450_AddedMeeting.resx">
+      <DependentUpon>201706081409450_AddedMeeting.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
