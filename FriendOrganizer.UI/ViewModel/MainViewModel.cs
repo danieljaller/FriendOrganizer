@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Autofac.Features.Indexed;
 using FriendOrganizer.UI.Event;
 using FriendOrganizer.UI.View.Services;
 using Prism.Commands;
@@ -10,18 +11,18 @@ namespace FriendOrganizer.UI.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
+        private readonly IIndex<string, IDetailViewModel> _detailViewModelCreator;
         private IEventAggregator _eventAggregator;
         private readonly IMessageDialogService _messageDialogService;
-        private Func<IFriendDetailViewModel> _friendDetailsViewModelCreator;
         private IDetailViewModel _detailViewModel;
         public INavigationViewModel NavigationViewModel { get; }
 
-        public MainViewModel(INavigationViewModel navigationViewModel, Func<IFriendDetailViewModel> friendDetailsViewModelCreator,
+        public MainViewModel(INavigationViewModel navigationViewModel, IIndex<string, IDetailViewModel> detailViewModelCreator,
             IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
         {
+            _detailViewModelCreator = detailViewModelCreator;
             _eventAggregator = eventAggregator;
             _messageDialogService = messageDialogService;
-            _friendDetailsViewModelCreator = friendDetailsViewModelCreator;
             _eventAggregator.GetEvent<OpenDetailsViewEvent>().Subscribe(OnOpenDetailsView);
             _eventAggregator.GetEvent<AfterDetailDeletedEvent>().Subscribe(AfterDetailDeleted);
             NavigationViewModel = navigationViewModel;
@@ -65,13 +66,8 @@ namespace FriendOrganizer.UI.ViewModel
                 if (result == MessageDialogResult.Cancel)
                     return;
             }
-
-            switch (args.ViewModelName)
-            {
-                case nameof(FriendDetailViewModel):
-                    DetailViewModel = _friendDetailsViewModelCreator();
-                    break;
-            }
+            
+            DetailViewModel = _detailViewModelCreator[args.ViewModelName];
             await DetailViewModel.LoadAsync(args.Id);
         }
 
