@@ -163,7 +163,13 @@ namespace FriendOrganizer.UI.ViewModel
         }
         private void OnRemoveFriendExecute()
         {
+            var friendToRemove = SelectedAddedFriend;
 
+            Meeting.Model.Friends.Remove(friendToRemove);
+            AddedFriends.Remove(friendToRemove);
+            AvailableFriends.Add(friendToRemove);
+            HasChanges = _meetingRepository.HasChanges();
+            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
         }
 
         private bool OnRemoveFriendCanExecute()
@@ -178,7 +184,13 @@ namespace FriendOrganizer.UI.ViewModel
 
         private void OnAddFriendExecute()
         {
+            var friendToAdd = SelectedAvailableFriend;
 
+            Meeting.Model.Friends.Add(friendToAdd);
+            AddedFriends.Add(friendToAdd);
+            AvailableFriends.Remove(friendToAdd);
+            HasChanges = _meetingRepository.HasChanges();
+            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
         }
     }
 }
