@@ -48,21 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FriendOrganizerDbContext.cs" />
-    <Compile Include="Migrations\201701151817528_InitialDatabase.cs" />
-    <Compile Include="Migrations\201701151817528_InitialDatabase.Designer.cs">
-      <DependentUpon>201701151817528_InitialDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704242047417_AddedProgrammingLanguage.cs" />
-    <Compile Include="Migrations\201704242047417_AddedProgrammingLanguage.Designer.cs">
-      <DependentUpon>201704242047417_AddedProgrammingLanguage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705020736511_AddedFriendPhoneNumbers.cs" />
-    <Compile Include="Migrations\201705020736511_AddedFriendPhoneNumbers.Designer.cs">
-      <DependentUpon>201705020736511_AddedFriendPhoneNumbers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706081409450_AddedMeeting.cs" />
-    <Compile Include="Migrations\201706081409450_AddedMeeting.Designer.cs">
-      <DependentUpon>201706081409450_AddedMeeting.cs</DependentUpon>
+    <Compile Include="Migrations\201711201042076_AddedRowVersionToFriend.cs" />
+    <Compile Include="Migrations\201711201042076_AddedRowVersionToFriend.Designer.cs">
+      <DependentUpon>201711201042076_AddedRowVersionToFriend.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,17 +66,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701151817528_InitialDatabase.resx">
-      <DependentUpon>201701151817528_InitialDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704242047417_AddedProgrammingLanguage.resx">
-      <DependentUpon>201704242047417_AddedProgrammingLanguage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705020736511_AddedFriendPhoneNumbers.resx">
-      <DependentUpon>201705020736511_AddedFriendPhoneNumbers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706081409450_AddedMeeting.resx">
-      <DependentUpon>201706081409450_AddedMeeting.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711201042076_AddedRowVersionToFriend.resx">
+      <DependentUpon>201711201042076_AddedRowVersionToFriend.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
