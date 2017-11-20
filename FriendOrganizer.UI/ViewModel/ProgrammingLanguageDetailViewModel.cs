@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using FriendOrganizer.Model;
 using FriendOrganizer.UI.Data.Repositories;
 using FriendOrganizer.UI.View.Services;
 using FriendOrganizer.UI.Wrapper;
@@ -15,6 +17,7 @@ namespace FriendOrganizer.UI.ViewModel
     public class ProgrammingLanguageDetailViewModel : DetailViewModelBase
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
+        private ProgrammingLanguageWrapper _selectedProgrammingLanguage;
 
         public ProgrammingLanguageDetailViewModel(IEventAggregator eventAggregator, IMessageDialogService messageDialogService, 
             IProgrammingLanguageRepository programmingLanguageRepository) 
@@ -23,11 +26,29 @@ namespace FriendOrganizer.UI.ViewModel
             _programmingLanguageRepository = programmingLanguageRepository;
             Title = "Programming Languages";
             ProgrammingLanguages = new ObservableCollection<ProgrammingLanguageWrapper>();
+
+            AddCommand = new DelegateCommand(OnAddExecute);
+            RemoveCommand = new DelegateCommand(OnRemoveExecute, OnRemoveCanExecute);
         }
 
         public ObservableCollection<ProgrammingLanguageWrapper> ProgrammingLanguages { get; }
 
-        public async override Task LoadAsync(int id)
+        public ICommand RemoveCommand { get; }
+
+        public ICommand AddCommand { get; }
+
+        public ProgrammingLanguageWrapper SelectedProgrammingLanguage
+        {
+            get { return _selectedProgrammingLanguage; }
+            set
+            {
+                _selectedProgrammingLanguage = value;
+                OnPropertyChanged();
+                ((DelegateCommand)RemoveCommand).RaiseCanExecuteChanged();
+            }
+        }
+
+        public override async Task LoadAsync(int id)
         {
             Id = id;
 
@@ -75,6 +96,31 @@ namespace FriendOrganizer.UI.ViewModel
             await _programmingLanguageRepository.SaveAsync();
             HasChanges = _programmingLanguageRepository.HasChanges();
             RaiseCollectionSavedEvent();
+        }
+
+        private void OnAddExecute()
+        {
+            var wrapper = new ProgrammingLanguageWrapper(new ProgrammingLanguage());
+            wrapper.PropertyChanged += Wrapper_PropertyChanged;
+            _programmingLanguageRepository.Add(wrapper.Model);
+            ProgrammingLanguages.Add(wrapper);
+
+            wrapper.Name = "";
+        }
+
+        private void OnRemoveExecute()
+        {
+            SelectedProgrammingLanguage.PropertyChanged -= Wrapper_PropertyChanged;
+            _programmingLanguageRepository.Remove(SelectedProgrammingLanguage.Model);
+            ProgrammingLanguages.Remove(SelectedProgrammingLanguage);
+            SelectedProgrammingLanguage = null;
+            HasChanges = _programmingLanguageRepository.HasChanges();
+            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+        }
+
+        private bool OnRemoveCanExecute()
+        {
+            return SelectedProgrammingLanguage != null;
         }
     }
 }
