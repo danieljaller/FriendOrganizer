@@ -19,8 +19,8 @@ namespace FriendOrganizer.UI.ViewModel
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private ProgrammingLanguageWrapper _selectedProgrammingLanguage;
 
-        public ProgrammingLanguageDetailViewModel(IEventAggregator eventAggregator, IMessageDialogService messageDialogService, 
-            IProgrammingLanguageRepository programmingLanguageRepository) 
+        public ProgrammingLanguageDetailViewModel(IEventAggregator eventAggregator, IMessageDialogService messageDialogService,
+            IProgrammingLanguageRepository programmingLanguageRepository)
             : base(eventAggregator, messageDialogService)
         {
             _programmingLanguageRepository = programmingLanguageRepository;
@@ -93,9 +93,23 @@ namespace FriendOrganizer.UI.ViewModel
 
         protected override async void OnSaveExecute()
         {
-            await _programmingLanguageRepository.SaveAsync();
-            HasChanges = _programmingLanguageRepository.HasChanges();
-            RaiseCollectionSavedEvent();
+            try
+            {
+                await _programmingLanguageRepository.SaveAsync();
+                HasChanges = _programmingLanguageRepository.HasChanges();
+                RaiseCollectionSavedEvent();
+            }
+            catch (Exception e)
+            {
+                while (e.InnerException != null)
+                {
+                    e = e.InnerException;
+                }
+                MessageDialogService.ShowInfoDialog("Error while saving the entities, " +
+                                                    "the data will be reloaded. Details: " + e.Message);
+                await LoadAsync(Id);
+
+            }
         }
 
         private void OnAddExecute()
@@ -108,8 +122,18 @@ namespace FriendOrganizer.UI.ViewModel
             wrapper.Name = "";
         }
 
-        private void OnRemoveExecute()
+        private async void OnRemoveExecute()
         {
+            var isReferenced =
+                await _programmingLanguageRepository.IsReferencedByFriendAsync(
+                    SelectedProgrammingLanguage.Id);
+            if (isReferenced)
+            {
+                MessageDialogService.ShowInfoDialog($"The language {SelectedProgrammingLanguage.Name}" +
+                                                    $" can't be removed, as it is referenced by at least one friend");
+                return;
+            }
+
             SelectedProgrammingLanguage.PropertyChanged -= Wrapper_PropertyChanged;
             _programmingLanguageRepository.Remove(SelectedProgrammingLanguage.Model);
             ProgrammingLanguages.Remove(SelectedProgrammingLanguage);
