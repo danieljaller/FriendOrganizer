@@ -46,6 +46,9 @@
     <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
     </Reference>
@@ -105,8 +108,10 @@
     <Compile Include="Data\Repositories\IGenericRepository.cs" />
     <Compile Include="Data\Repositories\IMeetingRepository.cs" />
     <Compile Include="Data\Repositories\IProgrammingLanguageRepository.cs" />
+    <Compile Include="Data\Repositories\IQuoteRepository.cs" />
     <Compile Include="Data\Repositories\MeetingRepository.cs" />
     <Compile Include="Data\Repositories\ProgrammingLanguageRepository.cs" />
+    <Compile Include="Data\Repositories\QuoteRepository.cs" />
     <Compile Include="Event\AfterCollectionSavedEvent.cs" />
     <Compile Include="Event\AfterDetailClosedEvent.cs" />
     <Compile Include="Event\AfterDetailDeletedEvent.cs" />
@@ -124,6 +129,7 @@
     <Compile Include="ViewModel\NavigationItemViewModel.cs" />
     <Compile Include="ViewModel\NavigationViewModel.cs" />
     <Compile Include="ViewModel\ProgrammingLanguageDetailViewModel.cs" />
+    <Compile Include="ViewModel\QuoteDetailViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\FriendDetailView.xaml.cs">
       <DependentUpon>FriendDetailView.xaml</DependentUpon>
@@ -145,6 +151,7 @@
     <Compile Include="Wrapper\ModelWrapper.cs" />
     <Compile Include="Wrapper\NotifyDataErrorInfoBase.cs" />
     <Compile Include="Wrapper\ProgrammingLanguageWrapper.cs" />
+    <Compile Include="Wrapper\QuoteWrapper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

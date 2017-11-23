@@ -21,22 +21,33 @@ namespace FriendOrganizer.UI.ViewModel
         private FriendWrapper _friend;
         private FriendPhoneNumberWrapper _selectedPhoneNumber;
         private readonly IProgrammingLanguageLookupDataService _programmingLanguageLookupDataService;
+        private readonly IQuoteRepository _quoteRepository;
 
         public FriendDetailViewModel(IFriendRepository friendRepository,
           IEventAggregator eventAggregator,
           IMessageDialogService messageDialogService,
-          IProgrammingLanguageLookupDataService programmingLanguageLookupDataService)
+          IProgrammingLanguageLookupDataService programmingLanguageLookupDataService,
+          IQuoteRepository quoteRepository)
           : base(eventAggregator, messageDialogService)
         {
             _friendRepository = friendRepository;
             _programmingLanguageLookupDataService = programmingLanguageLookupDataService;
+            _quoteRepository = quoteRepository;
 
             eventAggregator.GetEvent<AfterCollectionSavedEvent>().Subscribe(AfterCollectionSaved);
             AddPhoneNumberCommand = new DelegateCommand(OnAddPhoneNumberExecute);
             RemovePhoneNumberCommand = new DelegateCommand(OnRemovePhoneNumberExecute, OnRemovePhoneNumberCanExecute);
+            GenerateQuoteCommand = new DelegateCommand(OnGenerateQuoteExecute);
 
             ProgrammingLanguages = new ObservableCollection<LookupItem>();
             PhoneNumbers = new ObservableCollection<FriendPhoneNumberWrapper>();
+        }
+
+        private async void OnGenerateQuoteExecute()
+        {
+            var generatedQuote = await _quoteRepository.GenerateQuoteAsync();
+            Friend.Quote = generatedQuote;
+            Friend.Model.Quote = generatedQuote;
         }
 
         public override async Task LoadAsync(int friendId)
@@ -148,6 +159,8 @@ namespace FriendOrganizer.UI.ViewModel
         public ICommand AddPhoneNumberCommand { get; }
 
         public ICommand RemovePhoneNumberCommand { get; }
+
+        public ICommand GenerateQuoteCommand { get; }
 
         public ObservableCollection<LookupItem> ProgrammingLanguages { get; }
 

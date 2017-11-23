@@ -36,6 +36,7 @@ namespace FriendOrganizer.UI.Startup
             builder.RegisterType<FriendRepository>().As<IFriendRepository>();
             builder.RegisterType<MeetingRepository>().As<IMeetingRepository>();
             builder.RegisterType<ProgrammingLanguageRepository>().As<IProgrammingLanguageRepository>();
+            builder.RegisterType<QuoteRepository>().As<IQuoteRepository>().SingleInstance();
 
             return builder.Build();
         }

@@ -36,6 +36,12 @@ namespace FriendOrganizer.UI.Wrapper
             set => SetValue(value);
         }
 
+        public Quote Quote
+        {
+            get => GetValue<Quote>();
+            set => SetValue(value);
+        }
+
         protected override IEnumerable<string> ValidateProperty(string propertyName)
         {
             switch (propertyName)

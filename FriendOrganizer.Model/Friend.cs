@@ -29,6 +29,10 @@ namespace FriendOrganizer.Model
 
         public ProgrammingLanguage FavoriteLanguage { get; set; }
 
+        public Quote Quote { get; set; }
+
+        public int? QuoteId { get; set; }
+
         [Timestamp]
         public byte[] RowVersion { get; set; }
 

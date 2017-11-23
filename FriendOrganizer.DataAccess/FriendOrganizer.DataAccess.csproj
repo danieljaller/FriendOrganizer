@@ -52,6 +52,10 @@
     <Compile Include="Migrations\201711201042076_AddedRowVersionToFriend.Designer.cs">
       <DependentUpon>201711201042076_AddedRowVersionToFriend.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711221229426_AddedQuotesWithNullableForeignKeyInFriends.cs" />
+    <Compile Include="Migrations\201711221229426_AddedQuotesWithNullableForeignKeyInFriends.Designer.cs">
+      <DependentUpon>201711221229426_AddedQuotesWithNullableForeignKeyInFriends.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -68,6 +72,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711201042076_AddedRowVersionToFriend.resx">
       <DependentUpon>201711201042076_AddedRowVersionToFriend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711221229426_AddedQuotesWithNullableForeignKeyInFriends.resx">
+      <DependentUpon>201711221229426_AddedQuotesWithNullableForeignKeyInFriends.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

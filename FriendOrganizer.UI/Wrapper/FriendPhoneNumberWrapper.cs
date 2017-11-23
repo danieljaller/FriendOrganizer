@@ -14,5 +14,4 @@ namespace FriendOrganizer.UI.Wrapper
             set => SetValue(value);
         }
     }
-
 }
