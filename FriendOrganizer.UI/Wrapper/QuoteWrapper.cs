@@ -19,12 +19,6 @@ namespace FriendOrganizer.UI.Wrapper
             set => SetValue(value);
         }
 
-        public string Category
-        {
-            get => GetValue<string>();
-            set => SetValue(value);
-        }
-
         public string QuoteText
         {
             get => GetValue<string>();

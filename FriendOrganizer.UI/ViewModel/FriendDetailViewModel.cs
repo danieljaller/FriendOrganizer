@@ -1,4 +1,5 @@
-﻿using FriendOrganizer.Model;
+﻿using System;
+using FriendOrganizer.Model;
 using FriendOrganizer.UI.Event;
 using Prism.Events;
 using System.Threading.Tasks;
@@ -45,9 +46,16 @@ namespace FriendOrganizer.UI.ViewModel
 
         private async void OnGenerateQuoteExecute()
         {
-            var generatedQuote = await _quoteRepository.GenerateQuoteAsync();
-            Friend.Quote = generatedQuote;
-            Friend.Model.Quote = generatedQuote;
+            try
+            {
+                var generatedQuote = await _quoteRepository.GenerateQuoteAsync();
+                Friend.Quote = generatedQuote;
+                Friend.Model.Quote = generatedQuote;
+            }
+            catch(Exception e)
+            {
+                await MessageDialogService.ShowInfoDialogAsync(e.Message);
+            }
         }
 
         public override async Task LoadAsync(int friendId)
