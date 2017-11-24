@@ -97,6 +97,9 @@ namespace FriendOrganizer.UI.ViewModel
             {
                 Friend.FirstName = "";
             }
+            if(Friend.Quote == null)
+                Friend.Quote = new Quote(){QuoteText = "No quote generated yet.", Author = ""};
+
             SetTitle();
         }
 

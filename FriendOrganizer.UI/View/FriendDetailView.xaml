@@ -65,7 +65,6 @@
         <TextBlock Grid.Row="11" Margin="10 0 0 10" Text="{Binding Friend.Quote.Author}" FontSize="13" FontWeight="Bold"/>
         <Button HorizontalAlignment="Left" Grid.Row="12" Content="Generate Quote" Width="175"  Margin="10"
                 Command="{Binding GenerateQuoteCommand}"/>
-        
         <StackPanel Grid.Row="13" Orientation="Horizontal">
             <Button Content="Save" Width="125" Margin="10"
               Command="{Binding SaveCommand}"/>
